@@ -1,0 +1,1 @@
+The SQLite database file is created automatically on first run. It is intentionally excluded from the project ZIP.
