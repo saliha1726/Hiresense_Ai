@@ -1,3 +1,463 @@
-{% extends "base.html" %}{% block public %}<nav class="navbar navbar-expand-lg bg-white border-bottom"><div class="container"><a class="navbar-brand fw-bold text-primary" href="/">HireSense AI</a><div><a class="btn btn-outline-primary me-2" href="{{url_for('login')}}">Login</a><a class="btn btn-primary" href="{{url_for('register')}}">Get Started</a></div></div></nav>
-<section class="hero"><div class="container py-5"><div class="row align-items-center py-5"><div class="col-lg-7"><span class="badge text-bg-primary mb-3">AI-ASSISTED RECRUITMENT</span><h1 class="display-3 fw-bold">Screen resumes <span class="text-primary">smarter.</span></h1><p class="lead text-secondary my-4">HireSense AI compares resumes with job requirements using transparent NLP, skill matching and optional Gemini insights.</p><a class="btn btn-primary btn-lg me-2" href="{{url_for('register')}}">Start Screening</a><a class="btn btn-outline-dark btn-lg" href="{{url_for('login')}}">Recruiter Login</a></div><div class="col-lg-5"><div class="hero-card"><i class="bi bi-stars"></i><h3>Intelligent candidate analysis</h3><p>TF-IDF + cosine similarity + skills + experience, with explainable scores.</p></div></div></div></div></section>
-<section class="py-5"><div class="container"><h2 class="text-center fw-bold">Everything a college project needs</h2><div class="row g-4 mt-2">{% for icon,title,txt in [('file-earmark-person','Resume Upload','Extract candidate information from PDF and DOCX.'),('cpu','AI Screening','Calculate transparent match scores.'),('bar-chart','Analytics','Visualize screening outcomes.'),('trophy','Ranking','Compare candidates by score.'),('printer','Reports','Print professional screening reports.'),('shield-check','Safe Design','Secrets stay on the server.') ] %}<div class="col-md-4"><div class="card feature-card h-100"><i class="bi bi-{{icon}}"></i><h5>{{title}}</h5><p>{{txt}}</p></div></div>{% endfor %}</div></div></section><footer class="py-4 bg-dark text-white text-center">HireSense AI · AI-assisted screening for academic demonstration</footer>{% endblock %}
+{% extends "base.html" %}
+
+{% block public %}
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+    <div class="container py-2">
+
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
+            <span class="landing-logo">
+                <i class="bi bi-stars"></i>
+            </span>
+            <span>HireSense <span class="text-primary">AI</span></span>
+        </a>
+
+        <div class="d-flex align-items-center gap-2">
+            <a class="btn btn-light border" href="{{ url_for('login') }}">
+                Login
+            </a>
+
+            <a class="btn btn-primary px-4" href="{{ url_for('register') }}">
+                Get Started
+                <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="landing-hero">
+
+    <div class="container">
+
+        <div class="row align-items-center min-vh-75 py-5">
+
+            <!-- LEFT -->
+            <div class="col-lg-6">
+
+                <div class="landing-badge mb-4">
+                    <i class="bi bi-stars"></i>
+                    AI-POWERED RECRUITMENT
+                </div>
+
+                <h1 class="landing-title">
+                    Hire smarter.
+                    <span>Screen faster.</span>
+                </h1>
+
+                <p class="landing-description">
+                    HireSense AI helps recruiters analyze resumes,
+                    compare candidates and identify the strongest
+                    matches using transparent AI-assisted screening.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3 mt-4">
+
+                    <a class="btn btn-primary btn-lg px-4"
+                       href="{{ url_for('register') }}">
+
+                        Start Screening
+                        <i class="bi bi-arrow-right ms-2"></i>
+
+                    </a>
+
+                    <a class="btn btn-outline-dark btn-lg px-4"
+                       href="{{ url_for('login') }}">
+
+                        Recruiter Login
+
+                    </a>
+
+                </div>
+
+                <div class="landing-trust mt-4">
+
+                    <span>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Resume analysis
+                    </span>
+
+                    <span>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Candidate scoring
+                    </span>
+
+                    <span>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Explainable results
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+            <div class="col-lg-6 mt-5 mt-lg-0">
+
+                <div class="ai-dashboard-preview">
+
+                    <div class="preview-header">
+
+                        <div>
+                            <small>HireSense AI</small>
+                            <h5 class="mb-0">Candidate Analysis</h5>
+                        </div>
+
+                        <div class="preview-status">
+                            <span></span>
+                            AI Ready
+                        </div>
+
+                    </div>
+
+
+                    <div class="preview-score">
+
+                        <div>
+                            <small>Overall Match</small>
+                            <h2>87%</h2>
+                        </div>
+
+                        <div class="score-circle">
+                            <i class="bi bi-stars"></i>
+                        </div>
+
+                    </div>
+
+
+                    <div class="preview-grid">
+
+                        <div class="preview-metric">
+                            <small>Skills Match</small>
+                            <strong>91%</strong>
+                        </div>
+
+                        <div class="preview-metric">
+                            <small>Experience</small>
+                            <strong>84%</strong>
+                        </div>
+
+                        <div class="preview-metric">
+                            <small>ATS Score</small>
+                            <strong>89%</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="preview-section">
+
+                        <div class="preview-section-title">
+                            <span>Matched Skills</span>
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+
+                        <div class="skill-list">
+
+                            <span>Python</span>
+                            <span>SQL</span>
+                            <span>Data Analysis</span>
+                            <span>Machine Learning</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="preview-recommendation">
+
+                        <i class="bi bi-stars"></i>
+
+                        <div>
+                            <strong>AI Recommendation</strong>
+                            <p>
+                                Strong candidate match based on
+                                skills and experience.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+<section class="landing-stats">
+
+    <div class="container">
+
+        <div class="row text-center g-4">
+
+            <div class="col-md-4">
+                <div class="landing-stat">
+                    <strong>AI</strong>
+                    <span>Assisted Screening</span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="landing-stat">
+                    <strong>PDF & DOCX</strong>
+                    <span>Resume Support</span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="landing-stat">
+                    <strong>Explainable</strong>
+                    <span>Candidate Scores</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section class="landing-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <div class="section-label">
+                WHY HIRESENSE AI
+            </div>
+
+            <h2 class="section-title">
+                Everything you need to screen candidates
+            </h2>
+
+            <p class="section-description">
+                A complete recruitment screening workflow
+                designed to make candidate evaluation faster
+                and easier.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            {% for icon,title,txt in [
+                ('file-earmark-person','Resume Analysis','Extract candidate information from PDF and DOCX resumes.'),
+                ('stars','AI Screening','Analyze candidates against job requirements using AI-assisted scoring.'),
+                ('graph-up-arrow','Smart Analytics','Understand screening results through clear analytics and insights.'),
+                ('trophy','Candidate Ranking','Compare candidates and quickly identify the strongest matches.'),
+                ('file-earmark-text','Professional Reports','Generate clear screening reports for recruitment decisions.'),
+                ('shield-check','Secure Design','Keep application secrets and sensitive processing on your server.')
+            ] %}
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="landing-feature h-100">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-{{ icon }}"></i>
+                    </div>
+
+                    <h5>{{ title }}</h5>
+
+                    <p>
+                        {{ txt }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="workflow-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <div class="section-label">
+                SIMPLE WORKFLOW
+            </div>
+
+            <h2 class="section-title">
+                From resume to insight in three steps
+            </h2>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="workflow-card">
+
+                    <div class="workflow-number">
+                        01
+                    </div>
+
+                    <i class="bi bi-cloud-arrow-up"></i>
+
+                    <h5>Upload</h5>
+
+                    <p>
+                        Upload a candidate resume and select
+                        the relevant job.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="workflow-card">
+
+                    <div class="workflow-number">
+                        02
+                    </div>
+
+                    <i class="bi bi-stars"></i>
+
+                    <h5>Analyze</h5>
+
+                    <p>
+                        HireSense AI evaluates skills,
+                        experience and job compatibility.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="workflow-card">
+
+                    <div class="workflow-number">
+                        03
+                    </div>
+
+                    <i class="bi bi-bar-chart-line"></i>
+
+                    <h5>Decide</h5>
+
+                    <p>
+                        Review transparent scores and
+                        make better screening decisions.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+<section class="landing-cta">
+
+    <div class="container">
+
+        <div class="cta-card text-center">
+
+            <div class="cta-icon">
+                <i class="bi bi-stars"></i>
+            </div>
+
+            <h2>
+                Ready to screen smarter?
+            </h2>
+
+            <p>
+                Start analyzing candidates with HireSense AI.
+            </p>
+
+            <a href="{{ url_for('register') }}"
+               class="btn btn-light btn-lg px-5">
+
+                Get Started
+                <i class="bi bi-arrow-right ms-2"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer class="landing-footer">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+
+                <div class="footer-brand">
+                    <i class="bi bi-stars"></i>
+                    HireSense AI
+                </div>
+
+                <p>
+                    AI-assisted candidate screening platform.
+                </p>
+
+            </div>
+
+            <div class="col-md-6 text-md-end">
+
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
+
+                <a href="{{ url_for('register') }}">
+                    Get Started
+                </a>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="text-center small">
+            HireSense AI · AI-assisted recruitment screening
+        </div>
+
+    </div>
+
+</footer>
+
+{% endblock %}
